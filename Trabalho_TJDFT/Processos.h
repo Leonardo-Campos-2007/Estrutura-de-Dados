@@ -30,9 +30,9 @@ typedef struct {
     int desm1;
     int susm1;
 
-    int numeroProcessos();
-    int idultimooj();
-    int idprocesso();
+    int numeroProcessos(int );
+    int id_ultimo_oj();
+    int id_processo();
     int violenciaDomestica();
     int feminicidio();
     int ambiental();
