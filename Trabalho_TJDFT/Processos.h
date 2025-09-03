@@ -30,6 +30,19 @@ typedef struct {
     int desm1;
     int susm1;
 
+    int numeroProcessos();
+    int idultimooj();
+    int idprocesso();
+    int violenciaDomestica();
+    int feminicidio();
+    int ambiental();
+    int quilombolas();
+    int indigenas();
+    int infancia();
+    int numeroDias();
+    float percentualCumprimentoMeta1();
+    char gerarCSV();
+
 
 } Processos;
 
