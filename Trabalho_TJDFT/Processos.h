@@ -30,7 +30,12 @@ typedef struct {
     int desm1;
     int susm1;
 
-    int numeroProcessos(int );
+    
+
+
+} Processos;
+
+    int numeroProcessos( );
     int id_ultimo_oj();
     int id_processo();
     int violenciaDomestica();
@@ -42,8 +47,5 @@ typedef struct {
     int numeroDias();
     float percentualCumprimentoMeta1();
     char gerarCSV();
-
-
-} Processos;
 
 #endif
