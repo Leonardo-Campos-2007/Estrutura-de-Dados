@@ -35,17 +35,17 @@ typedef struct {
 
 } Processos;
 
-    int numeroProcessos( );
-    int id_ultimo_oj();
-    int id_processo();
-    int violenciaDomestica();
-    int feminicidio();
-    int ambiental();
-    int quilombolas();
-    int indigenas();
-    int infancia();
-    int numeroDias();
-    float percentualCumprimentoMeta1();
-    char gerarCSV();
+    int numeroProcessos(int quantidade);
+    int id_ultimo_oj(int id_oj);
+    int id_processo(int id_pro);
+    int violenciaDomestica(int domestica);
+    int feminicidio(int feminicidio);
+    int ambiental(int ambiental);
+    int quilombolas(int quilombolas);
+    int indigenas(int indigenas);
+    int infancia(int infancia);
+    int numeroDias(int numeroDias);
+    float percentualCumprimentoMeta1(int percentual);
+    void gerarCSV();
 
 #endif
