@@ -1,17 +1,18 @@
 #ifndef PROCESSOS_H
 #define PROCESSOS_H
 
-typedef struct {
+typedef struct
+{
     int id_processo;
     int numero_sigilo;
     char sigla_grau[20];
     char procedimento[50];
-    char ramo_justiça[50];
+    char ramo_justica[50];
     char sigla_tribunal[10];
     int id_tribunal;
     int recurso;
     int id_ultimo_oj;
-    int dt_recebimento;
+    char dt_recebimento[10];
     int id_ultima_classe;
     int flag_violencia_domestica;
     int flag_feminicidio;
@@ -30,22 +31,20 @@ typedef struct {
     int desm1;
     int susm1;
 
-    
-
-
 } Processos;
 
-    int numeroProcessos(int quantidade);
-    int id_ultimo_oj(int id_oj);
-    int id_processo(int id_pro);
-    int violenciaDomestica(int domestica);
-    int feminicidio(int feminicidio);
-    int ambiental(int ambiental);
-    int quilombolas(int quilombolas);
-    int indigenas(int indigenas);
-    int infancia(int infancia);
-    int numeroDias(int numeroDias);
-    float percentualCumprimentoMeta1(int percentual);
-    void gerarCSV();
+FILE *LerDados(const char *arquivo);
+int numeroProcessos(char *arquivo);
+int id_ultimo_oj(char *arquivo, int id_processo);
+int processoAntigo(char *arquivo);
+int violenciaDomestica(int violenciaDomestica);
+int feminicidio();
+int ambiental();
+int quilombolas();
+int indigenas();
+int infancia();
+int numeroDias();
+float percentualCumprimentoMeta1();
+char gerarCSV();
 
 #endif
