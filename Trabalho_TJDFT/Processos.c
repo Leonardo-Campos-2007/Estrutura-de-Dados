@@ -6,9 +6,9 @@
 
 #include <stdio.h>
 
-FILE *LerDados(const char *arquivo)
+FILE *LerDados(const char *TJDFT_filtrado)
 {
-    FILE *fp = fopen(arquivo, "r");
+    FILE *fp = fopen(TJDFT_filtrado, "r");
     if (!fp)
     {
         perror("Erro ao abrir arquivo");
@@ -18,9 +18,9 @@ FILE *LerDados(const char *arquivo)
     return fp; // retorna o ponteiro do arquivo
 }
 
-int numeroProcessos(char *arquivo)
+int numeroProcessos(const char *TJDFT_filtrado)
 {
-    FILE *fp = LerDados(arquivo); // Abre o arquivo
+    FILE *fp = LerDados(TJDFT_filtrado); // Abre o arquivo
 
     int i = 0;
     char linha[2048]; // tamanho que uma linha pode ter em caracteres
@@ -39,9 +39,9 @@ int numeroProcessos(char *arquivo)
     return i; // retorna o resultado
 }
 
-int id_ultimo_oj(char *arquivo, int id_processo)
+int id_ultimo_oj(const char *TJDFT_filtrado, int id_processo)
 {
-    FILE *fp = LerDados(arquivo);
+    FILE *fp = LerDados(TJDFT_filtrado);
 
     char linha[2048];
     Processos p;
@@ -62,9 +62,9 @@ int id_ultimo_oj(char *arquivo, int id_processo)
     return -1;
 }
 
-int processoAntigo(char *arquivo)
+int processoAntigo(const char *TJDFT_filtrado)
 {
-    FILE *fp = LerDados(arquivo);
+    FILE *fp = LerDados(TJDFT_filtrado);
 
     char linha[2048];
     Processos p;
@@ -91,10 +91,10 @@ int processoAntigo(char *arquivo)
     return antigo;
 }
 
-int violenciaDomestica(char *arquivo, int violenciaDomestica)
+int violenciaDomestica(const char *TJDFT_filtrado)
 {
 
-    FILE *fp = LerDados(arquivo);
+    FILE *fp = LerDados(TJDFT_filtrado);
 
     int i = 0;
     char linha[3000];
@@ -106,21 +106,22 @@ int violenciaDomestica(char *arquivo, int violenciaDomestica)
         if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d;",
                    &p.flag_violencia_domestica) == 1)
         {
-
-            i++;
+            if(p.flag_violencia_domestica == 1){
+                i++;
+            }
         }
     }
     fclose(fp);
     return i;
 }
 
-int feminicidio(char arquivo, int feminicidio)
+int feminicidio(const char *TJDFT_filtrado)
 {
 
-    FILE *fp = LerDados(arquivo);
+    FILE *fp = LerDados(TJDFT_filtrado);
 
     int i = 0;
-    
+
     char linha[3000];
     Processos p;
     fgets(linha, sizeof(linha), fp);
@@ -130,19 +131,22 @@ int feminicidio(char arquivo, int feminicidio)
         if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d",
                    &p.flag_feminicidio) == 1)
         {
-            i++;
+            if(p.flag_feminicidio == 1){
+                i++;
+            }
         }
     }
     fclose(fp);
     return i;
 }
 
-int ambiental(char arquivo, int ambiental){
+int ambiental(const char *TJDFT_filtrado)
+{
 
-    FILE *fp = LerDados(arquivo);
+    FILE *fp = LerDados(TJDFT_filtrado);
 
     int i = 0;
-    
+
     char linha[3000];
     Processos p;
     fgets(linha, sizeof(linha), fp);
@@ -152,20 +156,22 @@ int ambiental(char arquivo, int ambiental){
         if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d",
                    &p.flag_ambiental) == 1)
         {
-            i++;
+            if(p.flag_ambiental == 1){
+                i++;
+            }
         }
     }
     fclose(fp);
     return i;
-
 }
 
-int quilombolas(char arquivo, int quilombolas){
+int quilombolas(const char *TJDFT_filtrado)
+{
 
-    FILE *fp = LerDados(arquivo);
+    FILE *fp = LerDados(TJDFT_filtrado);
 
     int i = 0;
-    
+
     char linha[3000];
     Processos p;
     fgets(linha, sizeof(linha), fp);
@@ -175,44 +181,47 @@ int quilombolas(char arquivo, int quilombolas){
         if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d",
                    &p.flag_quilombolas) == 1)
         {
-            i++;
+            if(p.flag_quilombolas == 1){
+                i++;
+            }
         }
     }
     fclose(fp);
     return i;
-
 }
 
-int indigenas(char arquivo, int indigenas){
+int indigenas(const char *TJDFT_filtrado)
+{
 
-    FILE *fp = LerDados(arquivo);
+    FILE *fp = LerDados(TJDFT_filtrado);
 
     int i = 0;
-    
+
     char linha[3000];
     Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
     {
-        if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%dS",
+        if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d",
                    &p.flag_indigenas) == 1)
         {
-            i++;
+            if(p.flag_indigenas == 1){
+                i++;
+            }
         }
     }
     fclose(fp);
     return i;
-
 }
 
+int infancia(const char *TJDFT_filtrado)
+{
 
-int infancia(char arquivo, int infancia){
-
-    FILE *fp = LerDados(arquivo);
+    FILE *fp = LerDados(TJDFT_filtrado);
 
     int i = 0;
-    
+
     char linha[3000];
     Processos p;
     fgets(linha, sizeof(linha), fp);
@@ -222,16 +231,12 @@ int infancia(char arquivo, int infancia){
         if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d",
                    &p.flag_infancia) == 1)
         {
-            i++;
+            if(p.flag_infancia == 1){
+                i++;
+            }
         }
     }
     fclose(fp);
     return i;
-
 }
-
-
-
-
-
 

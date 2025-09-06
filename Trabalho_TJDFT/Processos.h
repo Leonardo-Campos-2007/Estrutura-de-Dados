@@ -12,7 +12,7 @@ typedef struct
     int id_tribunal;
     int recurso;
     int id_ultimo_oj;
-    char dt_recebimento[10];
+    char dt_recebimento[11];    // YYYY-MM-DD + '\0'
     int id_ultima_classe;
     int flag_violencia_domestica;
     int flag_feminicidio;
@@ -21,7 +21,7 @@ typedef struct
     int flag_indigenas;
     int flag_infancia;
     int decisao;
-    int dt_resolvido;
+    char dt_resolvido[11];     
     int cnm1;
     int primeirasentm1;
     int baixm1;
@@ -30,21 +30,18 @@ typedef struct
     int julgadom1;
     int desm1;
     int susm1;
-
 } Processos;
 
-FILE *LerDados(const char *arquivo);
-int numeroProcessos(char *arquivo);
-int id_ultimo_oj(char *arquivo, int id_processo);
-int processoAntigo(char *arquivo);
-int violenciaDomestica(int violenciaDomestica);
-int feminicidio();
-int ambiental();
-int quilombolas();
-int indigenas();
-int infancia();
-int numeroDias();
-float percentualCumprimentoMeta1();
-char gerarCSV();
+// Funções de manipulação
+FILE *LerDados(const char *TJDFT_filtrado);
+int numeroProcessos(const char *TJDFT_filtrado);
+int id_ultimo_oj(const char *TJDFT_filtrado, int id_processo);
+int processoAntigo(const char *TJDFT_filtrado);
+int violenciaDomestica(const char *TJDFT_filtrado);
+int feminicidio(const char *TJDFT_filtrado);
+int ambiental(const char *TJDFT_filtrado);
+int quilombolas(const char *TJDFT_filtrado);
+int indigenas(const char *TJDFT_filtrado);
+int infancia(const char *TJDFT_filtrado);
 
 #endif
