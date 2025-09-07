@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "processos.h"
+#include "processo.h"
 
 int main(){
 
