@@ -1,5 +1,5 @@
-#ifndef PROCESSOS_H
-#define PROCESSOS_H
+#ifndef PROCESSO_H
+#define PROCESSO_H
 
 typedef struct
 {
@@ -30,7 +30,7 @@ typedef struct
     int julgadom1;
     int desm1;
     int susm1;
-} Processos;
+} Processo;
 
 // Funções de manipulação
 FILE *LerDados(const char *TJDFT_filtrado);

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "processos.h"
+#include "processo.h"
 
 #include <stdio.h>
 
@@ -24,7 +24,7 @@ int numeroProcessos(const char *TJDFT_filtrado)
 
     int i = 0;
     char linha[2048]; // tamanho que uma linha pode ter em caracteres
-    Processos p;
+    Processo p;
     fgets(linha, sizeof(linha), fp); // Pula o cabeçalho.
 
     while (fgets(linha, sizeof(linha), fp))
@@ -44,7 +44,7 @@ int id_ultimo_oj(const char *TJDFT_filtrado, int id_processo)
     FILE *fp = LerDados(TJDFT_filtrado);
 
     char linha[2048];
-    Processos p;
+    Processo p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -67,7 +67,7 @@ int processoAntigo(const char *TJDFT_filtrado)
     FILE *fp = LerDados(TJDFT_filtrado);
 
     char linha[2048];
-    Processos p;
+    Processo p;
     fgets(linha, sizeof(linha), fp);
     char data[11] = "9999-12-31"; // valor inicial bem "grande"
     int antigo = 0;
@@ -98,7 +98,7 @@ int violenciaDomestica(const char *TJDFT_filtrado)
 
     int i = 0;
     char linha[3000];
-    Processos p;
+    Processo p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -123,7 +123,7 @@ int feminicidio(const char *TJDFT_filtrado)
     int i = 0;
 
     char linha[3000];
-    Processos p;
+    Processo p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -148,7 +148,7 @@ int ambiental(const char *TJDFT_filtrado)
     int i = 0;
 
     char linha[3000];
-    Processos p;
+    Processo p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -173,7 +173,7 @@ int quilombolas(const char *TJDFT_filtrado)
     int i = 0;
 
     char linha[3000];
-    Processos p;
+    Processo p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -198,7 +198,7 @@ int indigenas(const char *TJDFT_filtrado)
     int i = 0;
 
     char linha[3000];
-    Processos p;
+    Processo p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -223,7 +223,7 @@ int infancia(const char *TJDFT_filtrado)
     int i = 0;
 
     char linha[3000];
-    Processos p;
+    Processo p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
