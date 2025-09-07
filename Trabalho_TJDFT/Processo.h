@@ -44,4 +44,8 @@ int quilombolas(const char *TJDFT_filtrado);
 int indigenas(const char *TJDFT_filtrado);
 int infancia(const char *TJDFT_filtrado);
 
+
+void gerarCSV(const char *entrada, const char *saida);
+
+
 #endif

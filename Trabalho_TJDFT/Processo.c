@@ -106,7 +106,8 @@ int violenciaDomestica(const char *TJDFT_filtrado)
         if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d;",
                    &p.flag_violencia_domestica) == 1)
         {
-            if(p.flag_violencia_domestica == 1){
+            if (p.flag_violencia_domestica == 1)
+            {
                 i++;
             }
         }
@@ -131,7 +132,8 @@ int feminicidio(const char *TJDFT_filtrado)
         if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d",
                    &p.flag_feminicidio) == 1)
         {
-            if(p.flag_feminicidio == 1){
+            if (p.flag_feminicidio == 1)
+            {
                 i++;
             }
         }
@@ -156,7 +158,8 @@ int ambiental(const char *TJDFT_filtrado)
         if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d",
                    &p.flag_ambiental) == 1)
         {
-            if(p.flag_ambiental == 1){
+            if (p.flag_ambiental == 1)
+            {
                 i++;
             }
         }
@@ -181,7 +184,8 @@ int quilombolas(const char *TJDFT_filtrado)
         if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d",
                    &p.flag_quilombolas) == 1)
         {
-            if(p.flag_quilombolas == 1){
+            if (p.flag_quilombolas == 1)
+            {
                 i++;
             }
         }
@@ -206,7 +210,8 @@ int indigenas(const char *TJDFT_filtrado)
         if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d",
                    &p.flag_indigenas) == 1)
         {
-            if(p.flag_indigenas == 1){
+            if (p.flag_indigenas == 1)
+            {
                 i++;
             }
         }
@@ -231,7 +236,8 @@ int infancia(const char *TJDFT_filtrado)
         if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d",
                    &p.flag_infancia) == 1)
         {
-            if(p.flag_infancia == 1){
+            if (p.flag_infancia == 1)
+            {
                 i++;
             }
         }
@@ -240,3 +246,42 @@ int infancia(const char *TJDFT_filtrado)
     return i;
 }
 
+void gerarCSV(const char *entrada, const char *saida)
+{
+
+    FILE *fpIn = fopen(entrada, "r");
+    FILE *fpOut = fopen(saida, "w");
+
+    if (!fpIn || !fpOut)
+    {
+        printf("Erro ao abrir o arquivo!");
+        exit(1);
+    }
+
+    char linha[3000];
+    Processo p;
+
+    if (fgets(linha, sizeof(linha), fpIn))
+    {
+        fprintf(fpOut, "%s", linha);
+    }
+
+
+    while (fgets(linha, sizeof(linha), fpIn))
+    {
+        if (sscanf(linha, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d",
+                   &p.julgadom1) == 1)
+        {
+            if (p.julgadom1 == 1)
+            {
+
+                fprintf(fpOut, "%s", linha);
+                
+            }
+        }
+    }
+    fclose(fpIn);
+    fclose(fpOut);
+
+    printf("Arquivo gerado com sucesso!!!\n");
+}

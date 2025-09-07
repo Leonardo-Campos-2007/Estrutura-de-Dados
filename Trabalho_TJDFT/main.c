@@ -40,7 +40,19 @@ int main(){
     int qtdinfancia = infancia("TJDFT_filtrado.csv");
     printf("Quantidade de crimes com menores de idade: %d\n\n", qtdinfancia);
 
-    return 0;
+    gerarCSV("TJDFT_filtrado.csv", "processos_meta1.csv");
+
+    //gcc -Wall -Wextra -g3 main.c processo.c -o output/main.exe
+
+    //& ".\output\main.exe"
+
     
+
+
+
+    return 0;
+
 }
+    
+
 
