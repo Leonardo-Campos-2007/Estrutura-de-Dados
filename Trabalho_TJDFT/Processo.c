@@ -6,9 +6,9 @@
 
 #include <stdio.h>
 
-FILE *LerDados(const char *TJDFT_filtrado)
+FILE *LerDados(const char *arquivo)
 {
-    FILE *fp = fopen(TJDFT_filtrado, "r");
+    FILE *fp = fopen(arquivo, "r");
     if (!fp)
     {
         perror("Erro ao abrir arquivo");
@@ -17,14 +17,13 @@ FILE *LerDados(const char *TJDFT_filtrado)
 
     return fp; // retorna o ponteiro do arquivo
 }
-
-int numeroProcessos(const char *TJDFT_filtrado)
+int numeroProcessos(char *arquivo)
 {
-    FILE *fp = LerDados(TJDFT_filtrado); // Abre o arquivo
+    FILE *fp = LerDados(arquivo); // Abre o arquivo
 
     int i = 0;
     char linha[2048]; // tamanho que uma linha pode ter em caracteres
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp); // Pula o cabeçalho.
 
     while (fgets(linha, sizeof(linha), fp))
@@ -39,12 +38,12 @@ int numeroProcessos(const char *TJDFT_filtrado)
     return i; // retorna o resultado
 }
 
-int id_ultimo_oj(const char *TJDFT_filtrado, int id_processo)
+int id_ultimo_oj(char *arquivo, int id_processo)
 {
-    FILE *fp = LerDados(TJDFT_filtrado);
+    FILE *fp = LerDados(arquivo);
 
     char linha[2048];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -62,12 +61,12 @@ int id_ultimo_oj(const char *TJDFT_filtrado, int id_processo)
     return -1;
 }
 
-int processoAntigo(const char *TJDFT_filtrado)
+int processoAntigo(char *arquivo)
 {
-    FILE *fp = LerDados(TJDFT_filtrado);
+    FILE *fp = LerDados(arquivo);
 
     char linha[2048];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
     char data[11] = "9999-12-31"; // valor inicial bem "grande"
     int antigo = 0;
@@ -91,14 +90,13 @@ int processoAntigo(const char *TJDFT_filtrado)
     return antigo;
 }
 
-int violenciaDomestica(const char *TJDFT_filtrado)
+int violenciaDomestica(char *arquivo)
 {
-
-    FILE *fp = LerDados(TJDFT_filtrado);
+    FILE *fp = LerDados(arquivo);
 
     int i = 0;
     char linha[3000];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -116,15 +114,14 @@ int violenciaDomestica(const char *TJDFT_filtrado)
     return i;
 }
 
-int feminicidio(const char *TJDFT_filtrado)
+int feminicidio(char *arquivo)
 {
-
-    FILE *fp = LerDados(TJDFT_filtrado);
+    FILE *fp = LerDados(arquivo);
 
     int i = 0;
 
     char linha[3000];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -142,15 +139,14 @@ int feminicidio(const char *TJDFT_filtrado)
     return i;
 }
 
-int ambiental(const char *TJDFT_filtrado)
+int ambiental(char *arquivo)
 {
-
-    FILE *fp = LerDados(TJDFT_filtrado);
+    FILE *fp = LerDados(arquivo);
 
     int i = 0;
 
     char linha[3000];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -168,15 +164,15 @@ int ambiental(const char *TJDFT_filtrado)
     return i;
 }
 
-int quilombolas(const char *TJDFT_filtrado)
+int quilombolas(char *arquivo)
 {
 
-    FILE *fp = LerDados(TJDFT_filtrado);
+    FILE *fp = LerDados(arquivo);
 
     int i = 0;
 
     char linha[3000];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -194,15 +190,15 @@ int quilombolas(const char *TJDFT_filtrado)
     return i;
 }
 
-int indigenas(const char *TJDFT_filtrado)
+int indigenas(char *arquivo)
 {
 
-    FILE *fp = LerDados(TJDFT_filtrado);
+    FILE *fp = LerDados(arquivo);
 
     int i = 0;
 
     char linha[3000];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -220,15 +216,15 @@ int indigenas(const char *TJDFT_filtrado)
     return i;
 }
 
-int infancia(const char *TJDFT_filtrado)
+int infancia(char *arquivo)
 {
 
-    FILE *fp = LerDados(TJDFT_filtrado);
+    FILE *fp = LerDados(arquivo);
 
     int i = 0;
 
     char linha[3000];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -246,9 +242,80 @@ int infancia(const char *TJDFT_filtrado)
     return i;
 }
 
+int dias_totais(int ano, int mes, int dia)
+{
+    static int dias_por_mes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int i, dias = 0;
 
+    for (i = 1; i < ano; i++)
+        dias += 365 + ((i % 4 == 0 && (i % 100 != 0 || i % 400 == 0)) ? 1 : 0);
 
-void gerarCSV(const char *entrada, const char *saida)
+    for (i = 1; i < mes; i++)
+        dias += dias_por_mes[i - 1];
+
+    if (mes > 2 && (ano % 4 == 0 && (ano % 100 != 0 || ano % 400 == 0)))
+        dias += 1;
+
+    dias += dia;
+    return dias;
+}
+
+int numeroDias(char *arquivo, int id_processo)
+{
+    FILE *fp = LerDados(arquivo);
+
+    char linha[3000];
+    Processos p;
+
+    fgets(linha, sizeof(linha), fp); // pula cabeçalho
+
+    while (fgets(linha, sizeof(linha), fp))
+    {
+        // lê id_processo da struct e as datas
+        if (sscanf(linha,
+                   "%d;%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%10[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%10[^;]",
+                   &p.id_processo, p.dt_recebimento, p.dt_resolvido) == 3)
+        {
+            if (p.id_processo == id_processo)
+            {
+                int a1, m1, d1, a2, m2, d2;
+
+                // converte datas para inteiros
+                if (sscanf(p.dt_recebimento, "%d-%d-%d", &a1, &m1, &d1) != 3)
+                    continue;
+                if (sscanf(p.dt_resolvido, "%d-%d-%d", &a2, &m2, &d2) != 3)
+                    continue;
+
+                fclose(fp);
+
+                return dias_totais(a2, m2, d2) - dias_totais(a1, m1, d1);
+            }
+        }
+    }
+
+    fclose(fp);
+}
+
+float percentualCumprimentoMeta1(char *arquivo)
+{
+    FILE *fp = LerDados(arquivo);
+
+    char linha[3000];
+    Processos p;
+
+    fgets(linha, sizeof(linha), fp); // pula cabeçalho
+
+    while (fgets(linha, sizeof(linha), fp))
+    {
+        if (sscanf(linha,
+                   "%*d;%*d;%*[^;];%*[^;];%*[^;];%*[^;];%*d;%*d;%*d;%*[^;];%*d;%*d;%*d;%*d;%*d;%*d;%*d;%*d;%d;%*d;%*d;%*d;%*d;%d;%d",
+                   &p.cnm1, &p.julgadom1, &p.desm1, &p.susm1) == 4)
+        {
+            printf("%d", p.cnm1);
+        }
+    }
+}
+void gerarCSV(char *entrada, char *saida)
 {
 
     FILE *fpIn = fopen(entrada, "r");
@@ -261,13 +328,12 @@ void gerarCSV(const char *entrada, const char *saida)
     }
 
     char linha[3000];
-    Processo p;
+    Processos p;
 
     if (fgets(linha, sizeof(linha), fpIn))
     {
         fprintf(fpOut, "%s", linha);
     }
-
 
     while (fgets(linha, sizeof(linha), fpIn))
     {
@@ -278,7 +344,6 @@ void gerarCSV(const char *entrada, const char *saida)
             {
 
                 fprintf(fpOut, "%s", linha);
-                
             }
         }
     }
