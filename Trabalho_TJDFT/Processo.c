@@ -246,6 +246,8 @@ int infancia(const char *TJDFT_filtrado)
     return i;
 }
 
+
+
 void gerarCSV(const char *entrada, const char *saida)
 {
 
