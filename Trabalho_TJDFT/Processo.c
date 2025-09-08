@@ -296,24 +296,30 @@ int numeroDias(char *arquivo, int id_processo)
     fclose(fp);
 }
 
-float percentualCumprimentoMeta1(char *arquivo)
+void percentualCumprimentoMeta1(char *arquivo)
 {
     FILE *fp = LerDados(arquivo);
 
     char linha[3000];
     Processos p;
 
-    fgets(linha, sizeof(linha), fp); // pula cabeçalho
+    fgets(linha, sizeof(linha), fp);      
 
     while (fgets(linha, sizeof(linha), fp))
     {
         if (sscanf(linha,
-                   "%*d;%*d;%*[^;];%*[^;];%*[^;];%*[^;];%*d;%*d;%*d;%*[^;];%*d;%*d;%*d;%*d;%*d;%*d;%*d;%*d;%d;%*d;%*d;%*d;%*d;%d;%d",
+                   "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d;%*[^;];%*[^;];%*[^;];%*[^;];%d;%d;%d",
                    &p.cnm1, &p.julgadom1, &p.desm1, &p.susm1) == 4)
         {
-            printf("%d", p.cnm1);
+            float comprimento = (p.julgadom1/(p.cnm1 + p.desm1 - p.susm1)) * 100;
+            printf("O comprimento foi de %f ", comprimento - 100);
+            
         }
     }
+
+    fclose(1);
+    
+    
 }
 void gerarCSV(char *entrada, char *saida)
 {
