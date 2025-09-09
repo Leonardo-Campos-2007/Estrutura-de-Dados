@@ -4,11 +4,9 @@
 
 #include "equipe.h"
 
-int main() {
-
-    Equipe * tabela = LerDados("tabela.csv");
-
-printf("Posição: %d\n", tabela[0].Posicao);
-printf("Estado: %s\n", tabela[1].Estado);
-
+int main(){
+    Time* Tabela = LerDados("tabela.csv");
+        printf("%d\n", getPontos(Tabela, 20));
+        printf("%.2f%%\n", getAproveitamento(Tabela, "Palmeiras"));
+    return 0;
 }
