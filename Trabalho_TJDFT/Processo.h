@@ -1,5 +1,5 @@
-#ifndef PROCESSOS_H
-#define PROCESSOS_H
+#ifndef PROCESSO_H
+#define PROCESSO_H
 
 typedef struct
 {
@@ -31,7 +31,7 @@ typedef struct
     int desm1;
     int susm1;
 
-} Processos;
+} Processo;
 
 FILE *LerDados(const char *arquivo);
 int numeroProcessos(char *arquivo);

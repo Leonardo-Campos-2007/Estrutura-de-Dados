@@ -4,7 +4,7 @@
 #include "processo.h"
 
 int main(){
-    int QtdProcessos = numeroProcessos("TJDFT_filtrado.csv");
+        int QtdProcessos = numeroProcessos("TJDFT_filtrado.csv");
     if (QtdProcessos >= 0) {
         printf("Quantidade De Processos: %d\n\n", QtdProcessos);
     }
@@ -39,12 +39,16 @@ int main(){
     int qtdinfancia = infancia("TJDFT_filtrado.csv");
     printf("Quantidade de crimes com menores de idade: %d\n\n", qtdinfancia);
 
-    printf("A diferenca de dias eh: %d\n", numeroDias("TJDFT_filtrado.csv", 323961063));
+    printf("A diferenca de dias eh: %d\n\n", numeroDias("TJDFT_filtrado.csv", 323961063));
 
-   percentualCumprimentoMeta1("TJDFT_filtrado.csv");
-    
+    float meta1 = percentualCumprimentoMeta1("TJDFT_filtrado.csv");
+    printf("Porcentagem da meta1: %.2f\n\n", meta1);
 
     gerarCSV("TJDFT_filtrado.csv", "processos_meta1.csv");
+
+
+
+    
     
 
 
