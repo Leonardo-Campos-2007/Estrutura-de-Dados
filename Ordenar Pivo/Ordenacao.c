@@ -4,16 +4,27 @@
 
 void TrocarElemento(int * A, int * B);
 
+int Particao(int *V, int Inf, int Sup);
+
 int main(){
 
-    int X = 25;
-    int Y = 37;
-    TrocarElemento(&X, &Y);
+    int Vetor[] = {3, 6, 4, 5, 1, 7, 2};
+    int Tamanho = sizeof(Vetor) / sizeof(int);
+    Particao(Vetor, 1, 4);
 
 }
 
 void TrocarElemento(int * A, int * B){
 
-printf("%d \t %d \n ", *A, *B);
 
+
+int temp = *A;
+*A = *B;
+*B = temp;
+
+}
+
+int Particao(int *V, int Inf, int Sup){
+    int Pivot = V[(Inf + Sup) / 2];
+    printf("Pivot: ");
 }
