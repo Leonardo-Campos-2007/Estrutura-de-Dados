@@ -31,7 +31,7 @@ typedef struct
     int desm1;
     int susm1;
 
-} Processos;
+} Processo;
 
 FILE *LerDados(const char *arquivo);
 int numeroProcessos(char *arquivo);

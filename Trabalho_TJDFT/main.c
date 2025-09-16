@@ -41,7 +41,7 @@ int main(){
 
     printf("A diferenca de dias eh: %d\n", numeroDias("TJDFT_filtrado.csv", 323961063));
 
-    percentualCumprimentoMeta1("TJDFT_filtrado.csv");
+    //percentualCumprimentoMeta1("TJDFT_filtrado.csv");
 
     gerarCSV("TJDFT_filtrado.csv", "processos_meta1.csv");
    
