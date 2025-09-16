@@ -15,7 +15,7 @@ int main()
 
     int Vetor[] = {3, 6, 4, 5, 1, 7, 2};
     int Tamanho = sizeof(Vetor) / sizeof(int);
-    Particao(Vetor, 0, Tamanho - 1);
+    QuickSort(Vetor, 0, Tamanho - 1);
     ExibirVetor(Vetor, Tamanho);
 }
 
@@ -86,3 +86,6 @@ void ExibirVetor(int *V, int N)
     }
     printf("\n");
 }
+
+
+
