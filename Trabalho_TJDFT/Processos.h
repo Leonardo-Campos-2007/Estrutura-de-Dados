@@ -1,5 +1,5 @@
-#ifndef PROCESSO_H
-#define PROCESSO_H
+#ifndef PROCESSOS_H
+#define PROCESSOS_H
 
 typedef struct
 {
@@ -7,7 +7,7 @@ typedef struct
     int numero_sigilo;
     char sigla_grau[20];
     char procedimento[50];
-    char ramo_justiça[50];
+    char ramo_justica[50];
     char sigla_tribunal[10];
     int id_tribunal;
     int recurso;
@@ -31,7 +31,7 @@ typedef struct
     int desm1;
     int susm1;
 
-} Processo;
+} Processos;
 
 FILE *LerDados(const char *arquivo);
 int numeroProcessos(char *arquivo);

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "processo.h"
+#include "processos.h"
 
 #include <stdio.h>
 
@@ -23,7 +23,7 @@ int numeroProcessos(char *arquivo)
 
     int i = 0;
     char linha[2048]; // tamanho que uma linha pode ter em caracteres
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp); // Pula o cabeçalho.
 
     while (fgets(linha, sizeof(linha), fp))
@@ -43,7 +43,7 @@ int id_ultimo_oj(char *arquivo, int id_processo)
     FILE *fp = LerDados(arquivo);
 
     char linha[2048];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -66,7 +66,7 @@ int processoAntigo(char *arquivo)
     FILE *fp = LerDados(arquivo);
 
     char linha[2048];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
     char data[11] = "9999-12-31"; // valor inicial bem "grande"
     int antigo = 0;
@@ -96,7 +96,7 @@ int violenciaDomestica(char *arquivo)
 
     int i = 0;
     char linha[3000];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -121,7 +121,7 @@ int feminicidio(char *arquivo)
     int i = 0;
 
     char linha[3000];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -146,7 +146,7 @@ int ambiental(char *arquivo)
     int i = 0;
 
     char linha[3000];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -172,7 +172,7 @@ int quilombolas(char *arquivo)
     int i = 0;
 
     char linha[3000];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -198,7 +198,7 @@ int indigenas(char *arquivo)
     int i = 0;
 
     char linha[3000];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -224,7 +224,7 @@ int infancia(char *arquivo)
     int i = 0;
 
     char linha[3000];
-    Processo p;
+    Processos p;
     fgets(linha, sizeof(linha), fp);
 
     while (fgets(linha, sizeof(linha), fp))
@@ -265,7 +265,7 @@ int numeroDias(char *arquivo, int id_processo)
     FILE *fp = LerDados(arquivo);
 
     char linha[3000];
-    Processo p;
+    Processos p;
 
     fgets(linha, sizeof(linha), fp); // pula cabeçalho
 
@@ -301,19 +301,44 @@ float percentualCumprimentoMeta1(char *arquivo)
     FILE *fp = LerDados(arquivo);
 
     char linha[3000];
-    Processo p;
+    int cnm1 = 0;
+    int julgadom1 = 0;
+    int desm1 = 0;
+    int susm1 = 0;
+    Processos p;
 
     fgets(linha, sizeof(linha), fp); // pula cabeçalho
 
     while (fgets(linha, sizeof(linha), fp))
     {
         if (sscanf(linha,
-                   "%*d;%*d;%*[^;];%*[^;];%*[^;];%*[^;];%*d;%*d;%*d;%*[^;];%*d;%*d;%*d;%*d;%*d;%*d;%*d;%*d;%d;%*d;%*d;%*d;%*d;%d;%d",
+                   "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];"
+                   "%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%*[^;];%d;%*[^;];%*[^;];%*[^;];%*[^;];%d;%d;%d",
                    &p.cnm1, &p.julgadom1, &p.desm1, &p.susm1) == 4)
         {
-            printf("%d", p.cnm1);
+            if (p.cnm1 == 1)
+            {
+                cnm1++;
+            }
+            if (p.julgadom1 == 1)
+            {
+                julgadom1++;
+            }
+            if (p.desm1 == 1)
+            {
+                desm1++;
+            }
+            if (p.susm1 == 1)
+            {
+                susm1++;
+            }
         }
     }
+    if (cnm1 + desm1 - susm1 == 0)
+        return 0.0f;
+
+    float meta1 = ((float)julgadom1 / (cnm1 + desm1 - susm1)) * 100.0f;
+    return meta1;
 }
 void gerarCSV(char *entrada, char *saida)
 {
@@ -328,7 +353,7 @@ void gerarCSV(char *entrada, char *saida)
     }
 
     char linha[3000];
-    Processo p;
+    Processos p;
 
     if (fgets(linha, sizeof(linha), fpIn))
     {
