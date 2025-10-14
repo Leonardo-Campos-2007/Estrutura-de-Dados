@@ -20,7 +20,7 @@ int main()
 
     Lista *Planner = CriarLista(200);
 
-    GerarHTMLTabela();
+    GerarHTMLTabela(Planner, );
 
     AdicionarTarefa(Planner, T1);
     AdicionarTarefa(Planner, T2);
