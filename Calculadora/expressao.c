@@ -6,9 +6,7 @@
 
 #define MAX 512
 
-// -------------------------------
-// PILHA PARA STRINGS
-// -------------------------------
+
 typedef struct {
     char items[MAX][MAX];
     int top;
@@ -22,9 +20,7 @@ char * popStr(StackStr *s) {
     return s->items[s->top--];
 }
 
-// -------------------------------
-// PILHA PARA FLOATS
-// -------------------------------
+
 typedef struct {
     float items[MAX];
     int top;
@@ -38,9 +34,7 @@ float popF(StackF *s) {
     return s->items[s->top--];
 }
 
-// -------------------------------
-// VERIFICAÇÕES
-// -------------------------------
+
 int isBinaryOperator(char *t) {
     return strcmp(t, "+") == 0 ||
            strcmp(t, "-") == 0 ||
@@ -58,9 +52,7 @@ int isFunction(char *t) {
            strcmp(t, "log") == 0;  
 }
 
-// -------------------------------
-// POSFIXA → INFIXA
-// -------------------------------
+
 char * getFormaInFixa(char *Str) {
 
     static char resultado[MAX];
@@ -103,9 +95,7 @@ char * getFormaInFixa(char *Str) {
     return resultado;
 }
 
-// -------------------------------
-// CALCULA VALOR DA EXPRESSÃO POSFIXA
-// -------------------------------
+
 float getValorPosFixa(char *StrPosFixa) {
 
     StackF s;
@@ -136,7 +126,7 @@ float getValorPosFixa(char *StrPosFixa) {
             if (strcmp(t, "sin") == 0 || strcmp(t, "sen") == 0) pushF(&s, sin(v));
             else if (strcmp(t, "cos") == 0) pushF(&s, cos(v));
             else if (strcmp(t, "tan") == 0 || strcmp(t, "tg") == 0) pushF(&s, tan(v));
-            else if (strcmp(t, "log") == 0) pushF(&s, log(v));   // ► ADICIONADO (log natural)
+            else if (strcmp(t, "log") == 0) pushF(&s, log(v));  
 
         } else {
             pushF(&s, atof(t));
