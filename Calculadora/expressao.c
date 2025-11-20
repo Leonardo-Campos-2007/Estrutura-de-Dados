@@ -6,6 +6,11 @@
 
 #define MAX 512
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+
 
 typedef struct {
     char items[MAX][MAX];
@@ -16,9 +21,10 @@ void pushStr(StackStr *s, const char *str) {
     strcpy(s->items[++s->top], str);
 }
 
-char * popStr(StackStr *s) {
+char *popStr(StackStr *s) {
     return s->items[s->top--];
 }
+
 
 
 typedef struct {
@@ -35,6 +41,7 @@ float popF(StackF *s) {
 }
 
 
+
 int isBinaryOperator(char *t) {
     return strcmp(t, "+") == 0 ||
            strcmp(t, "-") == 0 ||
@@ -48,12 +55,14 @@ int isFunction(char *t) {
            strcmp(t, "sen") == 0 ||
            strcmp(t, "cos") == 0 ||
            strcmp(t, "tan") == 0 ||
-           strcmp(t, "tg") == 0 ||
-           strcmp(t, "log") == 0;  
+           strcmp(t, "tg") == 0  ||
+           strcmp(t, "log") == 0 ||      
+           strcmp(t, "log10") == 0;
 }
 
 
-char * getFormaInFixa(char *Str) {
+
+char *getFormaInFixa(char *Str) {
 
     static char resultado[MAX];
     StackStr s;
@@ -96,6 +105,7 @@ char * getFormaInFixa(char *Str) {
 }
 
 
+
 float getValorPosFixa(char *StrPosFixa) {
 
     StackF s;
@@ -110,6 +120,12 @@ float getValorPosFixa(char *StrPosFixa) {
 
         if (isBinaryOperator(t)) {
 
+            // verificação mínima de segurança (opcional)
+            if (s.top < 1) {
+                printf("Erro: pilha sem operandos suficientes para operador '%s'\n", t);
+                return NAN;
+            }
+
             float b = popF(&s);
             float a = popF(&s);
 
@@ -117,22 +133,55 @@ float getValorPosFixa(char *StrPosFixa) {
             else if (strcmp(t, "-") == 0) pushF(&s, a - b);
             else if (strcmp(t, "*") == 0) pushF(&s, a * b);
             else if (strcmp(t, "/") == 0) pushF(&s, a / b);
-            else if (strcmp(t, "^") == 0) pushF(&s, pow(a, b));
+            else if (strcmp(t, "^") == 0) pushF(&s, powf(a, b));
 
         } else if (isFunction(t)) {
 
+            if (s.top < 0) {
+                printf("Erro: função '%s' sem argumento na pilha\n", t);
+                return NAN;
+            }
+
             float v = popF(&s);
 
-            if (strcmp(t, "sin") == 0 || strcmp(t, "sen") == 0) pushF(&s, sin(v));
-            else if (strcmp(t, "cos") == 0) pushF(&s, cos(v));
-            else if (strcmp(t, "tan") == 0 || strcmp(t, "tg") == 0) pushF(&s, tan(v));
-            else if (strcmp(t, "log") == 0) pushF(&s, log(v));  
+            
+            float rad = v * (float)M_PI / 180.0f;
+
+            if (strcmp(t, "sin") == 0 || strcmp(t, "sen") == 0) {
+                pushF(&s, sinf(rad));
+            }
+            else if (strcmp(t, "cos") == 0) {
+                pushF(&s, cosf(rad));
+            }
+            else if (strcmp(t, "tan") == 0 || strcmp(t, "tg") == 0) {
+               
+                float c = cosf(rad);
+                if (fabsf(c) < 1e-7f) {
+                    printf("Erro: tangente indefinida para %f graus\n", v);
+                    return NAN;
+                }
+                pushF(&s, tanf(rad));
+            }
+
+           
+            else if (strcmp(t, "log") == 0 || strcmp(t, "log10") == 0) {
+                if (v <= 0.0f) {
+                    printf("Erro: log so aceita valores > 0\n");
+                    return NAN;
+                }
+                pushF(&s, log10f(v));  
+            }
 
         } else {
-            pushF(&s, atof(t));
+           
+            pushF(&s, atof(t)); 
         }
 
         t = strtok(NULL, " ");
+    }
+
+    if (s.top != 0) {
+        printf("Aviso: pilha resultou em %d elementos (esperado 1)\n", s.top + 1);
     }
 
     return popF(&s);
