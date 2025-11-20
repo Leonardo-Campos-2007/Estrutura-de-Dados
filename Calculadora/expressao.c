@@ -120,7 +120,7 @@ float getValorPosFixa(char *StrPosFixa) {
 
         if (isBinaryOperator(t)) {
 
-            // verificação mínima de segurança (opcional)
+            
             if (s.top < 1) {
                 printf("Erro: pilha sem operandos suficientes para operador '%s'\n", t);
                 return NAN;
